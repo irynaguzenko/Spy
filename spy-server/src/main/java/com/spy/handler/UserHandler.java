@@ -3,6 +3,7 @@ package com.spy.handler;
 import com.spy.dto.CreateUserDto;
 import com.spy.dto.UpdateUserDto;
 import com.spy.service.UserService;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -29,7 +30,7 @@ public class UserHandler {
         String userDetailsId = serverRequest.pathVariable(ID);
         return serverRequest.bodyToMono(UpdateUserDto.class)
                 .flatMap(updateUserDto -> userService.update(new BigInteger(userDetailsId), updateUserDto))
-                .flatMap(user -> ServerResponse.ok().build())
+                .flatMap(user -> ServerResponse.ok().body(BodyInserters.fromObject(user)))
                 .switchIfEmpty(ServerResponse.badRequest().build());
     }
 }
