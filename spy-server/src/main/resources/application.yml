@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: spy_db
+      username: spy_user
+      password: spy_PwDD
