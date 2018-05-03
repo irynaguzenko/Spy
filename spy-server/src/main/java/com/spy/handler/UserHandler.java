@@ -21,7 +21,7 @@ public class UserHandler {
     public Mono<ServerResponse> create(ServerRequest serverRequest) {
         Mono<CreateUserDto> userDto = serverRequest.bodyToMono(CreateUserDto.class);
         return userDto
-                .flatMap(user -> userService.create(user.getUsername(), user.getPassword()))
+                .flatMap(userService::create)
                 .flatMap(userDetails -> ServerResponse.ok().build())
                 .switchIfEmpty(ServerResponse.badRequest().build());
     }

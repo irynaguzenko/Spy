@@ -1,12 +1,10 @@
 package com.spy.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class User {
     @Id
@@ -15,8 +13,6 @@ public class User {
     private String familyName;
     private LocalDate birthDate;
     private String city;
-    @DBRef
-    private List<Event> events = new ArrayList<>();
 
     public BigInteger getId() {
         return id;
@@ -58,14 +54,6 @@ public class User {
         this.city = city;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -74,7 +62,23 @@ public class User {
                 ", familyName='" + familyName + '\'' +
                 ", birthDate=" + birthDate +
                 ", city='" + city + '\'' +
-                ", events=" + events +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(givenName, user.givenName) &&
+                Objects.equals(familyName, user.familyName) &&
+                Objects.equals(birthDate, user.birthDate) &&
+                Objects.equals(city, user.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, givenName, familyName, birthDate, city);
     }
 }
