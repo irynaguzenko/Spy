@@ -56,9 +56,9 @@ public class UserService {
     @PreAuthorize("principal.id == #userDetailsId")
     public Mono<User> update(BigInteger userDetailsId, @Valid UpdateUserDto updateUserDto) {
         return customUserDetailsRepository.findById(userDetailsId)
+                .switchIfEmpty(Mono.error(new UserNotFoundException()))
                 .flatMap(userDetails -> userRepository.save(user(updateUserDto, userDetails)))
-                .doOnNext(user -> log.info("User is updated to: {}", user))
-                .switchIfEmpty(Mono.error(new UserNotFoundException()));
+                .doOnNext(user -> log.info("User is updated to: {}", user));
     }
 
     private User user(UpdateUserDto updateUserDto, UserDetails userDetails) {

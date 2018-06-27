@@ -1,6 +1,6 @@
 package com.spy.dto;
 
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+//import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -13,7 +13,8 @@ public class EventDto {
     @NotNull
     private Long openingPeriodBeforeStartInMin;
     @NotNull
-    private GeoJsonPoint location;
+//    private GeoJsonPoint location;
+    private String description;
 
     public String getName() {
         return name;
@@ -39,11 +40,19 @@ public class EventDto {
         this.openingPeriodBeforeStartInMin = openingPeriodBeforeStartInMin;
     }
 
-    public GeoJsonPoint getLocation() {
-        return location;
+//    public GeoJsonPoint getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(GeoJsonPoint location) {
+//        this.location = location;
+//    }
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setLocation(GeoJsonPoint location) {
-        this.location = location;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

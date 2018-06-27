@@ -22,6 +22,8 @@ public class Event {
     private User admin;
     @DBRef
     private List<User> participants;
+    private EventStatus eventStatus;
+    private String description;
 
     public BigInteger getId() {
         return id;
@@ -87,6 +89,22 @@ public class Event {
         participants.add(user);
     }
 
+    public EventStatus getEventStatus() {
+        return eventStatus;
+    }
+
+    public void setEventStatus(EventStatus eventStatus) {
+        this.eventStatus = eventStatus;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -97,6 +115,8 @@ public class Event {
                 ", location=" + location +
                 ", admin=" + admin +
                 ", participants=" + participants +
+                ", eventStatus=" + eventStatus +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

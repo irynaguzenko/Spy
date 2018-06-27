@@ -43,7 +43,7 @@ public class EventService {
         event.setName(eventDto.getName());
         event.setDate(eventDto.getDate());
         event.setOpeningPeriodBeforeStartInMin(eventDto.getOpeningPeriodBeforeStartInMin());
-        event.setLocation(eventDto.getLocation());
+//        event.setLocation(eventDto.getLocation());
         return event;
     }
 }

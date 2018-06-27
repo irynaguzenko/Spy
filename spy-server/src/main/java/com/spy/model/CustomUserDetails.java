@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,17 +18,14 @@ public class CustomUserDetails implements UserDetails {
     private BigInteger id;
     private String username;
     private String password;
-    private List<Role> roles;
-    private boolean enabled;
+    private List<Role> roles = Arrays.asList(Role.ROLE_USER);
+    private boolean enabled = true;
     @DBRef
     private User user;
 
     public CustomUserDetails(String username, String password, User user) {
         this.username = username;
         this.password = password;
-        this.enabled = true;
-        this.roles = new ArrayList<>();
-        roles.add(Role.ROLE_USER);
         this.user = user;
     }
 

@@ -43,8 +43,8 @@ public class UserManagementTest extends SpyIntegrationTest {
                 .uri("/login")
                 .body(BodyInserters.fromFormData("username", USER_PHONE).with("password", USER_PASSWORD))
                 .exchange()
-                .expectStatus().isFound()
-                .expectHeader().valueEquals("Location", "/");
+                .expectStatus()
+                .isOk();
     }
 
     @Test
