@@ -1,2 +1,4 @@
 rootProject.name = 'spy'
 include 'spy-server'
+include 'spy-mobile'
+include 'spy-common'

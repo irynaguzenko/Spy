@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dark_geometry"
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/editProfileTextView"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Edit Profile"
+        android:textAlignment="center"
+        android:textColor="@color/grey"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/givenNameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44" />
+
+    <EditText
+        android:id="@+id/givenNameEditText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/border_bottom"
+        android:drawableBottom="@color/grey"
+        android:ems="10"
+        android:hint="Given Name"
+        android:inputType="textPersonName"
+        android:textColor="@color/grey"
+        android:textColorHint="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/familyNameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/familyNameEditText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/border_bottom"
+        android:drawableBottom="@color/grey"
+        android:ems="10"
+        android:hint="Family Name"
+        android:inputType="textPersonName"
+        android:textColor="@color/grey"
+        android:textColorHint="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cityEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/cityEditText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/border_bottom"
+        android:drawableBottom="@color/grey"
+        android:ems="10"
+        android:hint="City"
+        android:inputType="textPersonName"
+        android:textColor="@color/grey"
+        android:textColorHint="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/birthdateEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/birthdateEditText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/border_bottom"
+        android:ems="10"
+        android:hint="Birthdate"
+        android:inputType="date"
+        android:textColor="@color/grey"
+        android:textColorHint="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/radioSex"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioSex"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
+            android:text="MALE"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="124dp"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:text="FEMALE"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/grey"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/black"
+        android:backgroundTint="@color/black"
+        android:text="Save"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="127dp"
+        android:layout_height="105dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/givenNameEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/avatar" />
+
+</android.support.constraint.ConstraintLayout>

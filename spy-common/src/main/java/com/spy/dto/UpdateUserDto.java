@@ -1,5 +1,6 @@
 package com.spy.dto;
 
+
 import java.time.LocalDate;
 
 public class UpdateUserDto {
@@ -7,6 +8,7 @@ public class UpdateUserDto {
     private String familyName;
     private LocalDate birthDate;
     private String city;
+    private Gender gender;
 
     public String getGivenName() {
         return givenName;
@@ -38,5 +40,13 @@ public class UpdateUserDto {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

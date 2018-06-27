@@ -1,5 +1,6 @@
 package com.spy.model;
 
+import com.spy.dto.Gender;
 import org.springframework.data.annotation.Id;
 
 import java.math.BigInteger;
@@ -13,6 +14,7 @@ public class User {
     private String familyName;
     private LocalDate birthDate;
     private String city;
+    private Gender gender;
 
     public BigInteger getId() {
         return id;
@@ -54,6 +56,14 @@ public class User {
         this.city = city;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -62,6 +72,7 @@ public class User {
                 ", familyName='" + familyName + '\'' +
                 ", birthDate=" + birthDate +
                 ", city='" + city + '\'' +
+                ", gender=" + gender +
                 '}';
     }
 
@@ -74,11 +85,12 @@ public class User {
                 Objects.equals(givenName, user.givenName) &&
                 Objects.equals(familyName, user.familyName) &&
                 Objects.equals(birthDate, user.birthDate) &&
-                Objects.equals(city, user.city);
+                Objects.equals(city, user.city) &&
+                gender == user.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, givenName, familyName, birthDate, city);
+        return Objects.hash(id, givenName, familyName, birthDate, city, gender);
     }
 }

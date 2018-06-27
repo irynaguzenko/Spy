@@ -12,6 +12,14 @@ public class CreateUserDto {
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$).{8,}$")
     private String password;
 
+    public CreateUserDto() {
+    }
+
+    public CreateUserDto(@NotNull String username, @NotNull String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
