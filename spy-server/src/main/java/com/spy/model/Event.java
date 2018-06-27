@@ -1,12 +1,15 @@
 package com.spy.model;
 
+import com.spy.exception.UserIsAlreadyParticipantException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class Event {
     @Id
@@ -74,5 +77,26 @@ public class Event {
 
     public void setParticipants(List<User> participants) {
         this.participants = participants;
+    }
+
+    public void addParticipant(User user) {
+        participants = Optional.ofNullable(participants).orElseGet(LinkedList::new);
+        if (participants.contains(user) || admin.equals(user)) {
+            throw new UserIsAlreadyParticipantException();
+        }
+        participants.add(user);
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", openingPeriodBeforeStartInMin=" + openingPeriodBeforeStartInMin +
+                ", location=" + location +
+                ", admin=" + admin +
+                ", participants=" + participants +
+                '}';
     }
 }

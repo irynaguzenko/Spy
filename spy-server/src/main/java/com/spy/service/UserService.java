@@ -1,6 +1,8 @@
 package com.spy.service;
 
+import com.spy.dto.CreateUserDto;
 import com.spy.dto.UpdateUserDto;
+import com.spy.exception.UserAlreadyExistsException;
 import com.spy.exception.UserNotFoundException;
 import com.spy.exception.UserNotSavedException;
 import com.spy.model.CustomUserDetails;
@@ -12,10 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.math.BigInteger;
 
+@Validated
 public class UserService {
     private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
@@ -31,19 +36,28 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Mono<CustomUserDetails> create(String username, String password) {
+    public Mono<CustomUserDetails> create(@Valid CreateUserDto userDto) {
+        String username = userDto.getUsername();
+        return customUserDetailsRepository.findByUsername(username)
+                .flatMap(userDetails -> Mono.<CustomUserDetails>error(new UserAlreadyExistsException()))
+                .switchIfEmpty(createUser(userDto));
+    }
+
+    private Mono<CustomUserDetails> createUser(CreateUserDto userDto) {
         return userRepository.save(new User())
                 .flatMap(user -> {
-                    CustomUserDetails userDetails = new CustomUserDetails(username, passwordEncoder.encode(password), user);
+                    String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+                    CustomUserDetails userDetails = new CustomUserDetails(userDto.getUsername(), encodedPassword, user);
                     return customUserDetailsRepository.save(userDetails);
                 })
                 .switchIfEmpty(Mono.error(new UserNotSavedException()));
     }
 
     @PreAuthorize("principal.id == #userDetailsId")
-    public Mono<User> update(BigInteger userDetailsId, UpdateUserDto updateUserDto) {
+    public Mono<User> update(BigInteger userDetailsId, @Valid UpdateUserDto updateUserDto) {
         return customUserDetailsRepository.findById(userDetailsId)
                 .flatMap(userDetails -> userRepository.save(user(updateUserDto, userDetails)))
+                .doOnNext(user -> log.info("User is updated to: {}", user))
                 .switchIfEmpty(Mono.error(new UserNotFoundException()));
     }
 
@@ -53,7 +67,6 @@ public class UserService {
         user.setFamilyName(updateUserDto.getFamilyName());
         user.setBirthDate(updateUserDto.getBirthDate());
         user.setCity(updateUserDto.getCity());
-        log.info("User is updated to: {}", user);
         return user;
     }
 }
